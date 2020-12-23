@@ -1,11 +1,13 @@
 import logo from "./logo.svg";
 import "./App.css";
 import Timer from "./Timer";
-
+import Customizer from "./Customizer.js";
 function App() {
   return (
     <div className="App">
-      <Timer />
+      <Customizer>
+        <Timer />
+      </Customizer>
     </div>
   );
 }

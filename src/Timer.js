@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Duration from "luxon/src/duration.js";
+import { longBreakContext, breakContext, workContext } from "./Customizer.js";
 
 function Timer() {
   const [timerLength, setTimerLength] = useState(25);
@@ -9,6 +10,7 @@ function Timer() {
   const [sessionType, setSessionType] = useState("Work");
   const [sessionNumber, setSessionNumber] = useState(0);
 
+  const longBreakLength = useContext(longBreakContext);
   useEffect(() => {
     const interval = setInterval(() => {
       if (timerOn) {
@@ -68,6 +70,7 @@ function Timer() {
       <p>{timerDone ? "Timer is completed" : "Timer running"}</p>
       <p>{sessionType}</p>
       <p>Session Number: {sessionNumber}</p>
+      <p>Long Break : {longBreakLength}</p>
     </>
   );
 }
