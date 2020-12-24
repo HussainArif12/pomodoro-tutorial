@@ -70,7 +70,6 @@ function Timer() {
       <p>{timerDone ? "Timer is completed" : "Timer running"}</p>
       <p>{sessionType}</p>
       <p>Session Number: {sessionNumber}</p>
-      <p>Long Break : {longBreakLength}</p>
     </>
   );
 }
