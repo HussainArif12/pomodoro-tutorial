@@ -1,5 +1,10 @@
 import React, { createContext, useState } from "react";
 import Button from "@material-ui/core/Button";
+import LaptopChromebookOutlinedIcon from "@material-ui/icons/LaptopChromebook";
+import FreeBreakfastOutlinedIcon from "@material-ui/icons/FreeBreakfast";
+import LocalHotelOutlinedIcon from "@material-ui/icons/LocalHotel";
+import AddIcon from "@material-ui/icons/Add";
+import RemoveIcon from "@material-ui/icons/Remove";
 
 export const breakContext = createContext();
 export const workContext = createContext();
@@ -19,67 +24,80 @@ function Customizer(props) {
           </longBreakContext.Provider>
         </breakContext.Provider>
       </workContext.Provider>
-      <p>{breakLength}</p>
-      <Button
-        color="secondary"
-        variant="contained"
-        size="large"
-        onClick={() =>
-          setBreakLength((prevLength) =>
-            prevLength === 0 ? 0 : prevLength - 1
-          )
-        }
-      >
-        Decrement Break Length
-      </Button>
-      <Button
-        color="primary"
-        variant="contained"
-        size="large"
-        onClick={() => setBreakLength(breakLength + 1)}
-      >
-        Increment Break Length
-      </Button>
-      <p>{workLength}</p>
-      <Button
-        color="secondary"
-        variant="contained"
-        size="large"
-        onClick={() =>
-          setWorkLength((prevLength) => (prevLength === 0 ? 0 : prevLength - 1))
-        }
-      >
-        Decrement Work Length
-      </Button>
-      <Button
-        color="primary"
-        variant="contained"
-        size="large"
-        onClick={() => setWorkLength(workLength + 1)}
-      >
-        Increment Work Length
-      </Button>
-      <p>{longBreakLength}</p>
-      <Button
-        color="secondary"
-        variant="contained"
-        size="large"
-        onClick={() =>
-          setLongBreakLength((prevLength) =>
-            prevLength === 0 ? 0 : prevLength - 1
-          )
-        }
-      >
-        Decrement Long Break Length
-      </Button>
-      <Button
-        color="primary"
-        variant="contained"
-        size="large"
-        onClick={() => setLongBreakLength(longBreakLength + 1)}
-      >
-        Increment Long Break Length
-      </Button>
+      <div>
+        <div>
+          <p>
+            <FreeBreakfastOutlinedIcon />
+            Break: {breakLength}
+          </p>
+          <Button
+            color="secondary"
+            variant="contained"
+            size="large"
+            startIcon={<RemoveIcon />}
+            onClick={() =>
+              setBreakLength((prevLength) =>
+                prevLength === 0 ? 0 : prevLength - 1
+              )
+            }
+          ></Button>
+          <Button
+            color="primary"
+            variant="contained"
+            size="large"
+            startIcon={<AddIcon />}
+            onClick={() => setBreakLength(breakLength + 1)}
+          ></Button>
+        </div>
+        <div>
+          <p>
+            <LaptopChromebookOutlinedIcon />
+            Work: {workLength}
+          </p>
+          <Button
+            color="secondary"
+            variant="contained"
+            size="large"
+            startIcon={<RemoveIcon />}
+            onClick={() =>
+              setWorkLength((prevLength) =>
+                prevLength === 0 ? 0 : prevLength - 1
+              )
+            }
+          ></Button>
+          <Button
+            color="primary"
+            variant="contained"
+            size="large"
+            startIcon={<AddIcon />}
+            onClick={() => setWorkLength(workLength + 1)}
+          ></Button>
+        </div>
+        <div>
+          <p>
+            <LocalHotelOutlinedIcon />
+            Long Break: {longBreakLength}
+          </p>
+          <Button
+            color="secondary"
+            variant="contained"
+            size="large"
+            startIcon={<RemoveIcon />}
+            onClick={() =>
+              setLongBreakLength((prevLength) =>
+                prevLength === 0 ? 0 : prevLength - 1
+              )
+            }
+          ></Button>
+          <Button
+            color="primary"
+            variant="contained"
+            size="large"
+            startIcon={<AddIcon />}
+            onClick={() => setLongBreakLength(longBreakLength + 1)}
+          ></Button>
+        </div>
+      </div>
     </>
   );
 }

@@ -1,6 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import Duration from "luxon/src/duration.js";
 import { longBreakContext, breakContext, workContext } from "./Customizer.js";
+import Button from "@material-ui/core/Button";
+import LaptopChromebookOutlinedIcon from "@material-ui/icons/LaptopChromebook";
+import FreeBreakfastOutlinedIcon from "@material-ui/icons/FreeBreakfast";
+import LocalHotelOutlinedIcon from "@material-ui/icons/LocalHotel";
+import PlayArrowIcon from "@material-ui/icons/PlayArrow";
+import PauseIcon from "@material-ui/icons/Pause";
 
 function Timer() {
   const [timerLength, setTimerLength] = useState(25);
@@ -14,7 +20,7 @@ function Timer() {
   const breakLength = useContext(breakContext);
   const workLength = useContext(workContext);
 
-  const minuteMultiplier = 60;
+  const minuteMultiplier = 1;
   useEffect(() => {
     const interval = setInterval(() => {
       if (timerOn) {
@@ -72,16 +78,28 @@ function Timer() {
   }, [sessionNumber]);
   return (
     <>
-      <p>
-        Duration:{" "}
-        {Duration.fromObject({ seconds: timerLength }).toFormat("mm:ss")}
-      </p>
-      <button onClick={() => setTimerOn(!timerOn)}>
-        {timerOn ? "Pause" : "Run"}
-      </button>
-      <p>{timerDone ? "Timer is completed" : "Timer running"}</p>
-      <p>{sessionType}</p>
-      <p>Session Number: {sessionNumber}</p>
+      <div>
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          startIcon={timerOn ? <PauseIcon /> : <PlayArrowIcon />}
+          onClick={() => setTimerOn(!timerOn)}
+        >
+          {timerOn ? "Pause" : "Run"}
+        </Button>
+        <p>
+          Duration:{" "}
+          {Duration.fromObject({ seconds: timerLength }).toFormat("mm:ss")}
+        </p>
+        <p>Session Number: {sessionNumber}</p>
+        <div>
+          <p>{sessionType}</p>
+          {sessionType === "Break" && <FreeBreakfastOutlinedIcon />}
+          {sessionType === "Work" && <LaptopChromebookOutlinedIcon />}
+          {sessionType === "Long Break" && <LocalHotelOutlinedIcon />}
+        </div>
+      </div>
     </>
   );
 }
