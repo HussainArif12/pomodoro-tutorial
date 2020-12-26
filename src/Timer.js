@@ -11,6 +11,10 @@ function Timer() {
   const [sessionNumber, setSessionNumber] = useState(0);
 
   const longBreakLength = useContext(longBreakContext);
+  const breakLength = useContext(breakContext);
+  const workLength = useContext(workContext);
+
+  const minuteMultiplier = 60;
   useEffect(() => {
     const interval = setInterval(() => {
       if (timerOn) {
@@ -39,14 +43,22 @@ function Timer() {
 
   useEffect(() => {
     if (sessionType === "Work") {
-      setTimerLength(25);
+      setTimerLength(workLength * minuteMultiplier);
     }
+  }, [sessionType, workLength]);
+  useEffect(() => {
     if (sessionType === "Break") {
-      setTimerLength(5);
+      setTimerLength(breakLength * minuteMultiplier);
     }
+  }, [breakLength, sessionType]);
+
+  useEffect(() => {
     if (sessionType === "Long Break") {
-      setTimerLength(15);
+      setTimerLength(longBreakLength * minuteMultiplier);
     }
+  }, [longBreakLength, sessionType]);
+
+  useEffect(() => {
     if (sessionType === "Work" && timerDone) {
       setSessionNumber((prevNumber) => prevNumber + 1);
     }

@@ -1,4 +1,5 @@
 import React, { createContext, useState } from "react";
+import Button from "@material-ui/core/Button";
 
 export const breakContext = createContext();
 export const workContext = createContext();
@@ -11,8 +12,18 @@ function Customizer(props) {
 
   return (
     <>
+      <workContext.Provider value={workLength}>
+        <breakContext.Provider value={breakLength}>
+          <longBreakContext.Provider value={longBreakLength}>
+            {props.children}
+          </longBreakContext.Provider>
+        </breakContext.Provider>
+      </workContext.Provider>
       <p>{breakLength}</p>
-      <button
+      <Button
+        color="secondary"
+        variant="contained"
+        size="large"
         onClick={() =>
           setBreakLength((prevLength) =>
             prevLength === 0 ? 0 : prevLength - 1
@@ -20,23 +31,39 @@ function Customizer(props) {
         }
       >
         Decrement Break Length
-      </button>
-      <button onClick={() => setBreakLength(breakLength + 1)}>
+      </Button>
+      <Button
+        color="primary"
+        variant="contained"
+        size="large"
+        onClick={() => setBreakLength(breakLength + 1)}
+      >
         Increment Break Length
-      </button>
+      </Button>
       <p>{workLength}</p>
-      <button
+      <Button
+        color="secondary"
+        variant="contained"
+        size="large"
         onClick={() =>
           setWorkLength((prevLength) => (prevLength === 0 ? 0 : prevLength - 1))
         }
       >
         Decrement Work Length
-      </button>
-      <button onClick={() => setWorkLength(workLength + 1)}>
+      </Button>
+      <Button
+        color="primary"
+        variant="contained"
+        size="large"
+        onClick={() => setWorkLength(workLength + 1)}
+      >
         Increment Work Length
-      </button>
+      </Button>
       <p>{longBreakLength}</p>
-      <button
+      <Button
+        color="secondary"
+        variant="contained"
+        size="large"
         onClick={() =>
           setLongBreakLength((prevLength) =>
             prevLength === 0 ? 0 : prevLength - 1
@@ -44,20 +71,15 @@ function Customizer(props) {
         }
       >
         Decrement Long Break Length
-      </button>
-      <button onClick={() => setLongBreakLength(longBreakLength + 1)}>
+      </Button>
+      <Button
+        color="primary"
+        variant="contained"
+        size="large"
+        onClick={() => setLongBreakLength(longBreakLength + 1)}
+      >
         Increment Long Break Length
-      </button>
-
-      {
-        <workContext.Provider value={workLength}>
-          <breakContext.Provider value={breakLength}>
-            <longBreakContext.Provider value={longBreakLength}>
-              {props.children}
-            </longBreakContext.Provider>
-          </breakContext.Provider>
-        </workContext.Provider>
-      }
+      </Button>
     </>
   );
 }
