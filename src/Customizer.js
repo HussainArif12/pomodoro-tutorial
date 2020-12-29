@@ -24,7 +24,7 @@ function Customizer(props) {
           </longBreakContext.Provider>
         </breakContext.Provider>
       </workContext.Provider>
-      <div>
+      <div className="flex flex-col sm:justify-evenly sm:flex-row sm:space-y-0 mt-6 space-y-10  text-lg text-secondary">
         <div>
           <p>
             <FreeBreakfastOutlinedIcon />

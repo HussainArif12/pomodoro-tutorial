@@ -78,7 +78,7 @@ function Timer() {
   }, [sessionNumber]);
   return (
     <>
-      <div>
+      <div className="flex flex-col">
         <Button
           variant="contained"
           color="primary"
@@ -88,16 +88,22 @@ function Timer() {
         >
           {timerOn ? "Pause" : "Run"}
         </Button>
-        <p>
-          Duration:{" "}
+        <p className="font-sans tracking-widest text-6xl text-primary">
           {Duration.fromObject({ seconds: timerLength }).toFormat("mm:ss")}
         </p>
-        <p>Session Number: {sessionNumber}</p>
+        <p className="text-sessionNumber text-2xl">
+          Session Number: {sessionNumber}
+        </p>
         <div>
-          <p>{sessionType}</p>
-          {sessionType === "Break" && <FreeBreakfastOutlinedIcon />}
-          {sessionType === "Work" && <LaptopChromebookOutlinedIcon />}
-          {sessionType === "Long Break" && <LocalHotelOutlinedIcon />}
+          {sessionType === "Break" && (
+            <FreeBreakfastOutlinedIcon style={{ color: "white" }} />
+          )}
+          {sessionType === "Work" && (
+            <LaptopChromebookOutlinedIcon style={{ color: "white" }} />
+          )}
+          {sessionType === "Long Break" && (
+            <LocalHotelOutlinedIcon style={{ color: "white" }} />
+          )}
         </div>
       </div>
     </>
