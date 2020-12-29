@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Duration from "luxon/src/duration.js";
 import { longBreakContext, breakContext, workContext } from "./Customizer.js";
+
 import Button from "@material-ui/core/Button";
 import LaptopChromebookOutlinedIcon from "@material-ui/icons/LaptopChromebook";
 import FreeBreakfastOutlinedIcon from "@material-ui/icons/FreeBreakfast";
@@ -8,6 +9,8 @@ import LocalHotelOutlinedIcon from "@material-ui/icons/LocalHotel";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import PauseIcon from "@material-ui/icons/Pause";
 
+import endedAudio from "./Audio/alert_simple.wav";
+import startedAudio from "./Audio/notification_simple-01.wav";
 function Timer() {
   const [timerLength, setTimerLength] = useState(25);
   const [timerOn, setTimerOn] = useState(false);
@@ -19,6 +22,9 @@ function Timer() {
   const longBreakLength = useContext(longBreakContext);
   const breakLength = useContext(breakContext);
   const workLength = useContext(workContext);
+
+  const startedSound = new Audio(startedAudio);
+  const endedSound = new Audio(endedAudio);
 
   const minuteMultiplier = 1;
   useEffect(() => {
@@ -68,6 +74,9 @@ function Timer() {
     if (sessionType === "Work" && timerDone) {
       setSessionNumber((prevNumber) => prevNumber + 1);
     }
+    if (timerDone) {
+      endedSound.play();
+    }
   }, [sessionType, timerDone]);
 
   useEffect(() => {
@@ -84,7 +93,10 @@ function Timer() {
           color="primary"
           size="large"
           startIcon={timerOn ? <PauseIcon /> : <PlayArrowIcon />}
-          onClick={() => setTimerOn(!timerOn)}
+          onClick={() => {
+            setTimerOn(!timerOn);
+            startedSound.play();
+          }}
         >
           {timerOn ? "Pause" : "Run"}
         </Button>
