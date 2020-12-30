@@ -26,13 +26,13 @@ function Timer() {
   const startedSound = new Audio(startedAudio);
   const endedSound = new Audio(endedAudio);
 
-  const minuteMultiplier = 1;
+  const minuteMultiplier = 60;
   useEffect(() => {
     const interval = setInterval(() => {
       if (timerOn) {
         setTimerLength((timerLength) => timerLength - 1);
       }
-    }, 200);
+    }, 1000);
     if (timerOn) {
       setTimerDone(false);
     }
